@@ -9,7 +9,7 @@ export default class Categories extends React.Component {
         {
           categorie.map((categoria) => (
             <div key={ categoria.id }>
-              <label data-testid="category" htmlFor="categorias">
+              <label data-testid="category" htmlFor={ categoria.id }>
                 <input
                   type="radio"
                   name="categoria"

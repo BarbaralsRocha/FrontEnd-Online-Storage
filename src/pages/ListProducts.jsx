@@ -25,17 +25,16 @@ handleChangeSearch=({ target: { name, value } }) => {
 
 handleChange= async ({ target }) => {
   const { id } = target;
-  const { search } = this.state;
-  const listProducts = await getProductsFromCategoryAndQuery(id, search);
+  const listProducts = await getProductsFromCategoryAndQuery(id, '');
   const list = listProducts.results;
-  this.setState({ list, id });
+  this.setState({ list, id, isEmpty: list.length === 0 });
 }
 
 handleClick = async (id) => {
   const { search } = this.state;
   const listProducts = await getProductsFromCategoryAndQuery(id, search);
   const list = listProducts.results;
-  this.setState({ list, isEmpty: list.length === 0 });
+  this.setState({ list, isEmpty: list.length === 0, search: '' });
 }
 
 render() {
