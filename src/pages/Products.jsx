@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export default class Products extends React.Component {
   render() {
@@ -9,14 +10,20 @@ export default class Products extends React.Component {
         {
           isEmpty ? <p>Nenhum produto foi encontrado</p>
             : listProducts.map((list) => (
-              <div data-testid="product" key={ list.id }>
-                <p>{list.title}</p>
-                <img src={ list.thumbnail } alt={ list.title } />
-                <p>
-                  $
-                  { list.price }
-                </p>
-              </div>
+              <Link
+                data-testid="product-detail-link"
+                key={ list.id }
+                to={ `/product/${list.id}` }
+              >
+                <div data-testid="product">
+                  <p>{list.title}</p>
+                  <img src={ list.thumbnail } alt={ list.title } />
+                  <p>
+                    $
+                    { list.price }
+                  </p>
+                </div>
+              </Link>
             ))
         }
       </div>
