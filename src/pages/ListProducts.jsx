@@ -19,6 +19,16 @@ async componentDidMount() {
   this.setState({ categorieList: categorieAPI });
 }
 
+addToCart = (product) => {
+  if (!localStorage.cart) {
+    localStorage.setItem('cart', JSON.stringify([]));
+  }
+  const cart = JSON.parse(localStorage.getItem('cart'));
+  localStorage.setItem('cart', JSON.stringify([...cart, product]));
+  // const { history } = this.props;
+  // history.push('/cart');
+}
+
 handleChangeSearch=({ target: { name, value } }) => {
   this.setState({ [name]: value });
 }
@@ -62,7 +72,7 @@ render() {
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
       <Categories categorie={ categorieList } listCategories={ this.handleChange } />
-      <Products listProducts={ list } isEmpty={ isEmpty } />
+      <Products listProducts={ list } isEmpty={ isEmpty } addToCart={ this.addToCart } />
     </div>
   );
 }

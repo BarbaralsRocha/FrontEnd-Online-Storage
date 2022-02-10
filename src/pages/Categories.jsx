@@ -28,6 +28,6 @@ export default class Categories extends React.Component {
 }
 
 Categories.propTypes = {
-  categorie: PropTypes.arrayOf.isRequired,
+  categorie: PropTypes.arrayOf(PropTypes.object).isRequired,
   listCategories: PropTypes.func.isRequired,
 };
