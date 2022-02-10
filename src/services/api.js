@@ -17,11 +17,34 @@ export async function getCategory(categoryId) {
   return fetch(url).then((response) => response.json());
 }
 
-/* export function addProductToCart(product) {
-  const setItem =
-  localStorage.setItem('cart', product);
+export const getCartProducts = () => JSON.parse(localStorage.getItem('cart')) || [];
+
+export function addProductToCart(product) {
+  if (!localStorage.cart) {
+    localStorage.setItem('cart', JSON.stringify([]));
+  }
+
+  localStorage.setItem('cart', JSON.stringify([...getCartProducts(), product]));
 }
 
-export function getCartProducts() {
+export function deleteProductToCart(product) {
+  const cart = getCartProducts();
+  const indexToRemove = cart.findIndex((productFind) => productFind === product);
+  cart.splice(indexToRemove, 1);
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
 
-} */
+export function getProductsGroupedByQuantity() {
+  return getCartProducts().reduce((acc, reduceProd, _, array) => {
+    if (acc.some(({ id }) => id === reduceProd.id)) return acc;
+
+    const products = array.filter(({ id }) => id === reduceProd.id);
+
+    const prodWithQuantity = products[0];
+    prodWithQuantity.quantity = products.length;
+
+    acc.push(prodWithQuantity);
+
+    return acc;
+  }, []);
+}
