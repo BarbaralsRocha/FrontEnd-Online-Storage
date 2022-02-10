@@ -4,26 +4,34 @@ import { Link } from 'react-router-dom';
 
 export default class Products extends React.Component {
   render() {
-    const { listProducts, isEmpty } = this.props;
+    const { listProducts, isEmpty, addToCart } = this.props;
     return (
       <div>
         {
           isEmpty ? <p>Nenhum produto foi encontrado</p>
-            : listProducts.map((list) => (
-              <Link
-                data-testid="product-detail-link"
-                key={ list.id }
-                to={ `/product/${list.id}` }
-              >
-                <div data-testid="product">
-                  <p>{list.title}</p>
-                  <img src={ list.thumbnail } alt={ list.title } />
-                  <p>
-                    $
-                    { list.price }
-                  </p>
-                </div>
-              </Link>
+            : listProducts.map((product) => (
+              <div key={ product.id }>
+                <Link
+                  data-testid="product-detail-link"
+                  to={ `/product/${product.id}` }
+                >
+                  <div data-testid="product">
+                    <p>{product.title}</p>
+                    <img src={ product.thumbnail } alt={ product.title } />
+                    <p>
+                      $
+                      { product.price }
+                    </p>
+                  </div>
+                </Link>
+                <button
+                  type="button"
+                  data-testid="product-add-to-cart"
+                  onClick={ () => addToCart(product) }
+                >
+                  Adicionar ao carrinho
+                </button>
+              </div>
             ))
         }
       </div>
@@ -32,6 +40,7 @@ export default class Products extends React.Component {
 }
 
 Products.propTypes = {
-  listProducts: PropTypes.arrayOf.isRequired,
+  listProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
   isEmpty: PropTypes.bool.isRequired,
+  addToCart: PropTypes.func.isRequired,
 };

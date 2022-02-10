@@ -16,3 +16,12 @@ export async function getCategory(categoryId) {
   const url = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}`;
   return fetch(url).then((response) => response.json());
 }
+
+/* export function addProductToCart(product) {
+  const setItem =
+  localStorage.setItem('cart', product);
+}
+
+export function getCartProducts() {
+
+} */
