@@ -1,7 +1,10 @@
 import React from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import {
+  addProductToCart,
+  getCategories,
+  getProductsFromCategoryAndQuery } from '../services/api';
 import Categories from './Categories';
 import Products from './Products';
 
@@ -20,13 +23,7 @@ async componentDidMount() {
 }
 
 addToCart = (product) => {
-  if (!localStorage.cart) {
-    localStorage.setItem('cart', JSON.stringify([]));
-  }
-  const cart = JSON.parse(localStorage.getItem('cart'));
-  localStorage.setItem('cart', JSON.stringify([...cart, product]));
-  // const { history } = this.props;
-  // history.push('/cart');
+  addProductToCart(product);
 }
 
 handleChangeSearch=({ target: { name, value } }) => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { getProductsGroupedByQuantity } from '../services/api';
 
 export default class ShopCart extends React.Component {
   state = {
@@ -6,10 +7,7 @@ export default class ShopCart extends React.Component {
   }
 
   componentDidMount() {
-    if (localStorage.cart) {
-      const prod = JSON.parse(localStorage.getItem('cart'));
-      this.setState({ products: prod });
-    }
+    this.setState({ products: getProductsGroupedByQuantity() });
   }
 
   render() {
@@ -20,7 +18,7 @@ export default class ShopCart extends React.Component {
           !products.length
             ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
             : (
-              products.map(({ title, thumbnail, price, id }) => (
+              products.map(({ title, thumbnail, price, id, quantity }) => (
                 <div key={ id }>
                   <p data-testid="shopping-cart-product-name">{title}</p>
                   <img src={ thumbnail } alt={ title } />
@@ -28,7 +26,7 @@ export default class ShopCart extends React.Component {
                     $
                     {price}
                   </p>
-                  <p data-testid="shopping-cart-product-quantity">1</p>
+                  <p data-testid="shopping-cart-product-quantity">{quantity}</p>
                 </div>
               ))
             )
