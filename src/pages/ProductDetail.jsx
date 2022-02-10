@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { getProduct,
   addProductToCart,
 } from '../services/api';
+import Avaliation from './Avaliation';
+import Coments from './Coments';
 
 export default class ProductDetail extends React.Component {
   state = {
@@ -24,7 +26,8 @@ export default class ProductDetail extends React.Component {
 
   render() {
     const { product } = this.state;
-    const { title, price, thumbnail, attributes } = product;
+    const { id: idProduto, title, price, thumbnail, attributes } = product;
+    console.log('id product detail', idProduto);
     return (
       <div>
         <p data-testid="product-detail-name">{title}</p>
@@ -52,6 +55,10 @@ export default class ProductDetail extends React.Component {
             ))
           }
         </table>
+        <Avaliation idProduct={ idProduto } />
+        {
+          product.id && <Coments id={ idProduto } />
+        }
       </div>
     );
   }

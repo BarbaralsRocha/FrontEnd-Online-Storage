@@ -55,3 +55,13 @@ export function getProductsGroupedByQuantity() {
   }, []);
   return resul;
 }
+
+export const getComents = () => JSON.parse(localStorage.getItem('avaliation')) || [];
+
+export function addComents(coments) {
+  if (!localStorage.avaliation) {
+    localStorage.setItem('avaliation', JSON.stringify([]));
+  }
+
+  localStorage.setItem('avaliation', JSON.stringify([...getComents(), coments]));
+}
