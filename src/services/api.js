@@ -29,13 +29,19 @@ export function addProductToCart(product) {
 
 export function deleteProductToCart(product) {
   const cart = getCartProducts();
-  const indexToRemove = cart.findIndex((productFind) => productFind === product);
+  cart.reverse();
+  const indexToRemove = cart.findIndex((productFind) => productFind.id === product.id);
+  const fail = -1;
+  console.log(indexToRemove);
+  if (indexToRemove === fail) return false;
   cart.splice(indexToRemove, 1);
+  cart.reverse();
   localStorage.setItem('cart', JSON.stringify(cart));
+  return true;
 }
 
 export function getProductsGroupedByQuantity() {
-  return getCartProducts().reduce((acc, reduceProd, _, array) => {
+  const resul = getCartProducts().reduce((acc, reduceProd, _, array) => {
     if (acc.some(({ id }) => id === reduceProd.id)) return acc;
 
     const products = array.filter(({ id }) => id === reduceProd.id);
@@ -47,4 +53,5 @@ export function getProductsGroupedByQuantity() {
 
     return acc;
   }, []);
+  return resul;
 }
