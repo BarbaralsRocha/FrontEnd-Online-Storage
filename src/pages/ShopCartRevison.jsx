@@ -23,6 +23,18 @@ export default class ShopCartRevision extends React.Component {
      this.updateState();
    }
 
+   stockProducts = (product) => {
+     const listProductsCart = getProductsGroupedByQuantity();
+     const findProduct = listProductsCart.find((products) => products.id === product.id);
+     if (findProduct) {
+       if (findProduct.quantity >= product.available_quantity) {
+         return true;
+       }
+       return false;
+     }
+     return false;
+   }
+
    updateTotalPrice() {
      return getCartProducts().reduce((acc, { price }) => (acc + +price), 0);
    }
@@ -60,6 +72,7 @@ export default class ShopCartRevision extends React.Component {
                    <button
                      type="button"
                      data-testid="product-increase-quantity"
+                     disabled={ this.stockProducts(product) }
                      onClick={ () => this.increaseQuantity(product) }
                    >
                      +

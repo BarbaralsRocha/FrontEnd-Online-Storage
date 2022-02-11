@@ -10,7 +10,8 @@ import {
   getComents,
   getSize,
   getCartProducts,
-  addProductsSize } from '../services/api';
+  addProductsSize,
+  getProductsGroupedByQuantity } from '../services/api';
 import Avaliation from './Avaliation';
 import Coments from './Coments';
 
@@ -49,6 +50,18 @@ export default class ProductDetail extends React.Component {
     this.updateFilterComents(idProduct);
   }
 
+  stockProducts = (product) => {
+    const listProductsCart = getProductsGroupedByQuantity();
+    const findProduct = listProductsCart.find((products) => products.id === product.id);
+    if (findProduct) {
+      if (findProduct.quantity >= product.available_quantity) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }
+
   //  nome do produto, imagem, preço e especificação técnica
 
   render() {
@@ -63,6 +76,7 @@ export default class ProductDetail extends React.Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
+          disabled={ this.stockProducts(product) }
           onClick={ () => {
             addProductToCart(product);
             addProductsSize(getCartProducts().length);
