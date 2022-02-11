@@ -1,41 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BsStar, BsStarFill } from 'react-icons/bs'; // estrela vazia e cheia
-import { getComents } from '../services/api';
 import Stars from './Stars';
 
 export default class Coments extends React.Component {
-    state={
-      filterComents: [],
-    }
-
-    componentDidMount() {
-      const { id } = this.props;
-      const filterComents = getComents().filter((coments) => coments.idProduct === id);
-      console.log('filterComents', filterComents);
-      this.setState({ filterComents });
-    }
-
-    render() {
-      const { filterComents } = this.state;
-
-      return (
-        <div>
-          {
-            filterComents.map(({ email, description, notas }, index) => (
-              <div key={ index }>
-                <p>{email}</p>
-                <p>{description}</p>
-
-              </div>
-            ))
-          }
-
-        </div>
-      );
-    }
+  render() {
+    const { filterComents } = this.props;
+    const stars = [false, false, false, false, false];
+    return (
+      <div>
+        {
+          filterComents.map(({ email, description, notas }, index) => (
+            <div key={ index }>
+              <p>{email}</p>
+              <p>{description}</p>
+              {
+                stars.map((_, idx) => (
+                  <Stars
+                    key={ idx * Math.random() }
+                    handleChange={ () => null }
+                    isSelected={ idx <= notas - 1 }
+                    index={ idx * Math.random() }
+                  />
+                ))
+              }
+            </div>
+          ))
+        }
+      </div>
+    );
+  }
 }
 
 Coments.propTypes = {
-  id: PropTypes.string.isRequired,
+  filterComents: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

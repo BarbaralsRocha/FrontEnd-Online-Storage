@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Stars from './Stars';
-import { addComents } from '../services/api';
+// import { addComents } from '../services/api';
 
 export default class Avaliation extends React.Component {
     state={
@@ -30,15 +30,9 @@ export default class Avaliation extends React.Component {
       this.setState({ stars: avaliation, btnActive: false, notas: id });
     }
 
-    handleClick=() => {
-      const { idProduct } = this.props;
-      const { email, description, notas } = this.state;
-      const avaliation = { idProduct, email, description, notas };
-      addComents(avaliation);
-    }
-
     render() {
-      const { stars, email, description, desactive, btnActive } = this.state;
+      const { stars, email, description, desactive, btnActive, notas } = this.state;
+      const { handleClick } = this.props;
 
       return (
         <div>
@@ -48,6 +42,7 @@ export default class Avaliation extends React.Component {
             value={ email }
             placeholder="email"
             onChange={ this.handleChangeEmail }
+            data-testid="product-detail-email"
           />
           <textarea
             data-testid="product-detail-evaluation"
@@ -61,7 +56,14 @@ export default class Avaliation extends React.Component {
           <div>
             <button
               type="button"
-              onClick={ this.handleClick }
+              onClick={ () => {
+                handleClick(email, description, notas);
+                this.setState({
+                  email: '',
+                  description: '',
+                  stars: [false, false, false, false, false],
+                });
+              } }
               data-testid="submit-review-btn"
               disabled={ !(desactive === false && btnActive === false) }
             >
@@ -83,5 +85,5 @@ export default class Avaliation extends React.Component {
     }
 }
 Avaliation.propTypes = {
-  idProduct: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };

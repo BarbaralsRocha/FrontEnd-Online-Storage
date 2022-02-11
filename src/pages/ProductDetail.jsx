@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 
-import { getProduct,
+import {
+  getProduct,
   addProductToCart,
+  addComents,
+  getComents,
 } from '../services/api';
 import Avaliation from './Avaliation';
 import Coments from './Coments';
@@ -14,18 +17,35 @@ export default class ProductDetail extends React.Component {
     product: {
       attributes: [],
     },
+    filterComents: [],
   }
 
   async componentDidMount() {
     const { match: { params: { id } } } = this.props;
     const product = await getProduct(id);
     this.setState({ product });
+
+    this.updateFilterComents(id);
+  }
+
+  updateFilterComents = (id) => {
+    const filterComents = getComents().filter((coments) => coments.idProduct === id);
+    console.log('filterComents', filterComents);
+    this.setState({ filterComents });
+  }
+
+  handleClick = (email, description, notas) => {
+    console.log(email, description, notas);
+    const { product: { id: idProduct } } = this.state;
+    const avaliation = { idProduct, email, description, notas };
+    addComents(avaliation);
+    this.updateFilterComents(idProduct);
   }
 
   //  nome do produto, imagem, preço e especificação técnica
 
   render() {
-    const { product } = this.state;
+    const { product, filterComents } = this.state;
     const { id: idProduto, title, price, thumbnail, attributes } = product;
     console.log('id product detail', idProduto);
     return (
@@ -55,9 +75,9 @@ export default class ProductDetail extends React.Component {
             ))
           }
         </table>
-        <Avaliation idProduct={ idProduto } />
+        <Avaliation idProduct={ idProduto } handleClick={ this.handleClick } />
         {
-          product.id && <Coments id={ idProduto } />
+          product.id && <Coments id={ idProduto } filterComents={ filterComents } />
         }
       </div>
     );
