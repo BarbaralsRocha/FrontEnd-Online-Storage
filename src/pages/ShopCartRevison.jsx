@@ -77,7 +77,7 @@ export default class ShopCartRevision extends React.Component {
          }
          <div>
            <p>
-             Total $
+             Total R$
              {totalPrice}
            </p>
          </div>
