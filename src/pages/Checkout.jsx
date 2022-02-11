@@ -1,6 +1,6 @@
 import React from 'react';
 import UserForm from './UserForm';
-import ShopCart from './ShopCart';
+import ShopCartRevision from './ShopCartRevison';
 
 export default class Checkout extends React.Component {
   state = {
@@ -16,11 +16,6 @@ export default class Checkout extends React.Component {
       city: '',
       state: '',
     },
-    cartList: [],
-  }
-
-  componentDidMount() {
-
   }
 
   handleChange = ({ target: { name, value } }) => {
@@ -32,6 +27,7 @@ export default class Checkout extends React.Component {
     const { formState } = this.state;
     return (
       <div>
+        <ShopCartRevision />
         <UserForm { ...formState } handleChange={ this.handleChange } />
         <button
           type="button"
