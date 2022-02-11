@@ -37,6 +37,10 @@ export default class Products extends React.Component {
                       </p>
                     </div>
                   </Link>
+                  {
+                    product.shipping.free_shipping
+                    && <p data-testid="free-shipping">FRETE GRÁTIS </p>
+                  }
                   <button
                     type="button"
                     data-testid="product-add-to-cart"

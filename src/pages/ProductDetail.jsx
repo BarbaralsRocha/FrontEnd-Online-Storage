@@ -73,6 +73,11 @@ export default class ProductDetail extends React.Component {
         <p data-testid="product-detail-name">{title}</p>
         <p>{price}</p>
         <img src={ thumbnail } alt={ title } />
+        {
+          product.id
+          && product.shipping.free_shipping
+          && <p data-testid="free-shipping">FRETE GRÁTIS</p>
+        }
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
