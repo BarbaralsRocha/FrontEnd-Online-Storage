@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import ListProducts from '../pages/ListProducts';
 import ShopCart from '../pages/ShopCart';
 import ProductDetail from '../pages/ProductDetail';
+import Checkout from '../pages/Checkout';
 
 export default class Content extends React.Component {
   render() {
@@ -15,6 +16,7 @@ export default class Content extends React.Component {
             path="/product/:id"
             component={ ProductDetail }
           />
+          <Route path="/checkout" component={ Checkout } />
         </Switch>
       </main>
     );

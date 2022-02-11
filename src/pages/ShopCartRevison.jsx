@@ -1,13 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import {
-  getProductsGroupedByQuantity,
-  getCartProducts,
-  deleteProductToCart,
-  addProductToCart,
-} from '../services/api';
+import { getCartProducts, getProductsGroupedByQuantity } from '../services/api';
+import * as api from '../services/api';
 
-export default class ShopCart extends React.Component {
+export default class ShopCartRevision extends React.Component {
   state = {
     products: [],
     totalPrice: '',
@@ -18,13 +13,13 @@ export default class ShopCart extends React.Component {
   }
 
   increaseQuantity = (product) => {
-    addProductToCart(product);
+    api.addProductToCart(product);
     this.updateState();
   }
 
    decreaseQuantity = (product, qtd = 0) => {
-     deleteProductToCart(product);
-     if (qtd === 0) while (deleteProductToCart(product));
+     api.deleteProductToCart(product);
+     if (qtd === 0) while (api.deleteProductToCart(product));
      this.updateState();
    }
 
@@ -82,15 +77,9 @@ export default class ShopCart extends React.Component {
          }
          <div>
            <p>
-             Preço Total R$
+             Total R$
              {totalPrice}
            </p>
-           <Link
-             to="/checkout"
-             data-testid="checkout-products"
-           >
-             Finalizar Compra
-           </Link>
          </div>
        </div>
      );

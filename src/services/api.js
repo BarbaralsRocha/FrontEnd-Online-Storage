@@ -29,13 +29,15 @@ export function addProductToCart(product) {
 
 export function deleteProductToCart(product) {
   const cart = getCartProducts();
+
   cart.reverse();
+  // findIndex - quando não encontra o elemento retorna -1
   const indexToRemove = cart.findIndex((productFind) => productFind.id === product.id);
   const fail = -1;
-  console.log(indexToRemove);
   if (indexToRemove === fail) return false;
   cart.splice(indexToRemove, 1);
   cart.reverse();
+
   localStorage.setItem('cart', JSON.stringify(cart));
   return true;
 }
