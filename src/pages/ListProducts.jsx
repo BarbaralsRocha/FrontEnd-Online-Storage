@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import {
   addProductToCart,
   getCategories,
-  getProductsFromCategoryAndQuery } from '../services/api';
+  getProductsFromCategoryAndQuery,
+  getSize,
+  addProductsSize,
+  getCartProducts } from '../services/api';
 import Categories from './Categories';
 import Products from './Products';
 
@@ -15,15 +18,18 @@ state= {
   search: '',
   id: '',
   isEmpty: false,
+  size: 0,
 }
 
 async componentDidMount() {
   const categorieAPI = await getCategories();
-  this.setState({ categorieList: categorieAPI });
+  this.setState({ categorieList: categorieAPI, size: getSize() });
 }
 
 addToCart = (product) => {
   addProductToCart(product);
+  addProductsSize(getCartProducts().length);
+  this.setState({ size: getSize() });
 }
 
 handleChangeSearch=({ target: { name, value } }) => {
@@ -45,7 +51,7 @@ handleClick = async (id) => {
 }
 
 render() {
-  const { categorieList, list, search, id, isEmpty } = this.state;
+  const { categorieList, list, search, id, isEmpty, size } = this.state;
   return (
     <div>
       <input
@@ -65,6 +71,7 @@ render() {
       <Link to="/cart" data-testid="shopping-cart-button">
         <AiOutlineShoppingCart />
       </Link>
+      <p data-testid="shopping-cart-size">{size}</p>
       <p data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
