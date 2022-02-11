@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getProductsGroupedByQuantity, getCartProducts } from '../services/api';
-import * as api from '../services/api';
+import {
+  getProductsGroupedByQuantity,
+  getCartProducts,
+  deleteProductToCart,
+  addProductToCart,
+} from '../services/api';
 
 export default class ShopCart extends React.Component {
   state = {
@@ -14,13 +18,13 @@ export default class ShopCart extends React.Component {
   }
 
   increaseQuantity = (product) => {
-    api.addProductToCart(product);
+    addProductToCart(product);
     this.updateState();
   }
 
    decreaseQuantity = (product, qtd = 0) => {
-     api.deleteProductToCart(product);
-     if (qtd === 0) while (api.deleteProductToCart(product));
+     deleteProductToCart(product);
+     if (qtd === 0) while (deleteProductToCart(product));
      this.updateState();
    }
 
