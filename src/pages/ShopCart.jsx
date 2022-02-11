@@ -5,6 +5,7 @@ import {
   getCartProducts,
   deleteProductToCart,
   addProductToCart,
+  addProductsSize,
 } from '../services/api';
 
 export default class ShopCart extends React.Component {
@@ -15,6 +16,11 @@ export default class ShopCart extends React.Component {
 
   componentDidMount() {
     this.updateState();
+  }
+
+  getSizeCart() {
+    const size = getCartProducts();
+    addProductsSize(size.length);
   }
 
   increaseQuantity = (product) => {
@@ -37,6 +43,7 @@ export default class ShopCart extends React.Component {
        products: getProductsGroupedByQuantity(),
        totalPrice: this.updateTotalPrice().toFixed(2),
      });
+     this.getSizeCart();
    }
 
    render() {

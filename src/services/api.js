@@ -67,3 +67,9 @@ export function addComents(coments) {
 
   localStorage.setItem('avaliation', JSON.stringify([...getComents(), coments]));
 }
+
+export const getSize = () => JSON.parse(localStorage.getItem('size')) || 0;
+
+export function addProductsSize(size) {
+  localStorage.setItem('size', JSON.stringify(size));
+}

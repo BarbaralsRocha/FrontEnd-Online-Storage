@@ -8,7 +8,9 @@ import {
   addProductToCart,
   addComents,
   getComents,
-} from '../services/api';
+  getSize,
+  getCartProducts,
+  addProductsSize } from '../services/api';
 import Avaliation from './Avaliation';
 import Coments from './Coments';
 
@@ -18,9 +20,14 @@ export default class ProductDetail extends React.Component {
       attributes: [],
     },
     filterComents: [],
+    size: getSize(),
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.updateProduct();
+  }
+
+  updateProduct = async () => {
     const { match: { params: { id } } } = this.props;
     const product = await getProduct(id);
     this.setState({ product });
@@ -45,7 +52,7 @@ export default class ProductDetail extends React.Component {
   //  nome do produto, imagem, preço e especificação técnica
 
   render() {
-    const { product, filterComents } = this.state;
+    const { product, filterComents, size } = this.state;
     const { id: idProduto, title, price, thumbnail, attributes } = product;
     console.log('id product detail', idProduto);
     return (
@@ -56,10 +63,15 @@ export default class ProductDetail extends React.Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          onClick={ () => addProductToCart(product) }
+          onClick={ () => {
+            addProductToCart(product);
+            addProductsSize(getCartProducts().length);
+            this.setState({ size: getSize() });
+          } }
         >
           Adicionar ao carrinho
         </button>
+        <p data-testid="shopping-cart-size">{size}</p>
         <Link to="/cart" data-testid="shopping-cart-button">
           <AiOutlineShoppingCart />
         </Link>
