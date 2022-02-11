@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getProductsGroupedByQuantity } from '../services/api';
 import * as api from '../services/api';
 
@@ -63,6 +64,15 @@ export default class ShopCart extends React.Component {
                ))
              )
          }
+         <div>
+           <p>$ 0,00</p>
+           <Link
+             to="/checkout"
+             data-testid="checkout-products"
+           >
+             Finalizar Compra
+           </Link>
+         </div>
        </div>
      );
    }
