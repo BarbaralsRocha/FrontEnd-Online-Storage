@@ -1,30 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getProductsGroupedByQuantity } from '../services/api';
+import { getProductsGroupedByQuantity, getCartProducts } from '../services/api';
 import * as api from '../services/api';
 
 export default class ShopCart extends React.Component {
   state = {
     products: [],
+    totalPrice: '',
   }
 
   componentDidMount() {
-    this.setState({ products: getProductsGroupedByQuantity() });
+    this.updateState();
   }
 
-   increaseQuantity = (product) => {
-     api.addProductToCart(product);
-     this.setState({ products: getProductsGroupedByQuantity() });
-   }
+  increaseQuantity = (product) => {
+    api.addProductToCart(product);
+    this.updateState();
+  }
 
    decreaseQuantity = (product, qtd = 0) => {
      api.deleteProductToCart(product);
      if (qtd === 0) while (api.deleteProductToCart(product));
-     this.setState({ products: getProductsGroupedByQuantity() });
+     this.updateState();
+   }
+
+   updateTotalPrice() {
+     return getCartProducts().reduce((acc, { price }) => (acc + +price), 0);
+   }
+
+   updateState() {
+     this.setState({
+       products: getProductsGroupedByQuantity(),
+       totalPrice: this.updateTotalPrice().toFixed(2),
+     });
    }
 
    render() {
-     const { products } = this.state;
+     const { products, totalPrice } = this.state;
      return (
        <div>
          {
@@ -65,7 +77,10 @@ export default class ShopCart extends React.Component {
              )
          }
          <div>
-           <p>$ 0,00</p>
+           <p>
+             Preço Total R$
+             {totalPrice}
+           </p>
            <Link
              to="/checkout"
              data-testid="checkout-products"
