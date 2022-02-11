@@ -34,8 +34,16 @@ export default class ShopCart extends React.Component {
      this.updateState();
    }
 
-   updateTotalPrice() {
-     return getCartProducts().reduce((acc, { price }) => (acc + +price), 0);
+   stockProducts = (product) => {
+     const listProductsCart = getProductsGroupedByQuantity();
+     const findProduct = listProductsCart.find((products) => products.id === product.id);
+     if (findProduct) {
+       if (findProduct.quantity >= product.available_quantity) {
+         return true;
+       }
+       return false;
+     }
+     return false;
    }
 
    updateState() {
@@ -44,6 +52,10 @@ export default class ShopCart extends React.Component {
        totalPrice: this.updateTotalPrice().toFixed(2),
      });
      this.getSizeCart();
+   }
+
+   updateTotalPrice() {
+     return getCartProducts().reduce((acc, { price }) => (acc + +price), 0);
    }
 
    render() {
@@ -72,6 +84,7 @@ export default class ShopCart extends React.Component {
                    <button
                      type="button"
                      data-testid="product-increase-quantity"
+                     disabled={ this.stockProducts(product) }
                      onClick={ () => this.increaseQuantity(product) }
                    >
                      +
