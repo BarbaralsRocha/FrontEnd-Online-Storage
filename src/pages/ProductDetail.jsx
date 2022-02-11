@@ -10,8 +10,7 @@ import {
   getComents,
   getSize,
   getCartProducts,
-  addProductsSize,
-} from '../services/api';
+  addProductsSize } from '../services/api';
 import Avaliation from './Avaliation';
 import Coments from './Coments';
 
