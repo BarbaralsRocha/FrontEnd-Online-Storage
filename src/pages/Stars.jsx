@@ -13,9 +13,8 @@ export default class Stars extends React.Component {
           type="checkbox"
           name="index"
           checked={ isSelected }
-          id={ index }
+          className={ index }
           onChange={ handleChange }
-          className="stars"
         />
         {
           isSelected ? <BsStarFill /> : <BsStar />

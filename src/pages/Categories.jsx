@@ -1,25 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import InputCategories from '../components/InputCategories';
+import '../css/Categories.css';
 
 export default class Categories extends React.Component {
+  state = {
+    renderList: [],
+    // categorieList: [],
+  }
+
+  componentDidMount() {
+    const carouselSize = 8;
+    const { categorieList } = this.props;
+    console.log('prop', categorieList);
+    console.log('teste', categorieList.slice(0, carouselSize));
+    this.setState({
+      renderList: categorieList.slice(0, carouselSize),
+      // categorieList,
+    });
+  }
+
   render() {
-    const { categorie, listCategories } = this.props;
+    const { renderList } = this.state;
+    const { handleChange } = this.props;
     return (
-      <div>
+      <div className="categories">
         {
-          categorie.map((categoria) => (
-            <div key={ categoria.id }>
-              <label data-testid="category" htmlFor={ categoria.id }>
-                <input
-                  type="radio"
-                  name="categoria"
-                  id={ categoria.id }
-                  value={ categoria.name }
-                  onChange={ listCategories }
-                />
-                { categoria.name }
-              </label>
-            </div>
+          renderList.map((categoria) => (
+            <InputCategories
+              key={ categoria.id }
+              listCategories={ handleChange }
+              categoria={ categoria }
+            />
           ))
         }
       </div>
@@ -28,6 +40,6 @@ export default class Categories extends React.Component {
 }
 
 Categories.propTypes = {
-  categorie: PropTypes.arrayOf(PropTypes.object).isRequired,
-  listCategories: PropTypes.func.isRequired,
+  categorieList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleChange: PropTypes.func.isRequired,
 };

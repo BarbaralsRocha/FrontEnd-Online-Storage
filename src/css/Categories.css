@@ -1,0 +1,10 @@
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 16px;
+}
+
+.categories label {
+  padding: 16px;
+}

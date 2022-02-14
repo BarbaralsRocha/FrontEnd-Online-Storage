@@ -1,0 +1,45 @@
+.header {
+  align-items: center;
+  background-color: #0e2f6a;
+  display: flex;
+  height: 90px;
+  justify-content: space-around;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.trybe {
+  color: white;
+  font-family: Play , sans-serif;
+  font-size: 40px;
+}
+
+.shopping {
+  color: white;
+  font-family: ABeeZee , sans-serif;
+  font-size: 20px;
+  margin-left: 50px;
+}
+
+.trybe-logo-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-links-content {
+  align-items: center;
+  display: flex;
+}
+
+.header-links-content a {
+  color: white;
+  font-size: 20px;
+  margin-left: 50px;
+  text-decoration: none;
+}
+
+.header-links-content a:hover {
+  color: #71a0f0;
+}
