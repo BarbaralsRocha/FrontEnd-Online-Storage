@@ -54,7 +54,7 @@ export default class UserForm extends React.Component {
         <input
           type="text"
           name="name"
-          id=""
+          className=""
           value={ name }
           placeholder="Nome completo"
           data-testid="checkout-fullname"
@@ -63,7 +63,7 @@ export default class UserForm extends React.Component {
         <input
           type="text"
           name="cpf"
-          id=""
+          className=""
           value={ cpf }
           placeholder="CPF"
           data-testid="checkout-email"
@@ -72,7 +72,7 @@ export default class UserForm extends React.Component {
         <input
           type="text"
           name="email"
-          id=""
+          className=""
           value={ email }
           placeholder="E-mail"
           data-testid="checkout-cpf"
@@ -81,7 +81,7 @@ export default class UserForm extends React.Component {
         <input
           type="text"
           name="phone"
-          id=""
+          className=""
           value={ phone }
           placeholder="Telefone"
           data-testid="checkout-phone"
@@ -90,7 +90,7 @@ export default class UserForm extends React.Component {
         <input
           type="text"
           name="cep"
-          id=""
+          className=""
           value={ cep }
           placeholder="CEP"
           data-testid="checkout-cep"
@@ -99,7 +99,7 @@ export default class UserForm extends React.Component {
         <input
           type="text"
           name="address"
-          id=""
+          className=""
           value={ address }
           placeholder="Endereço"
           data-testid="checkout-address"
@@ -108,7 +108,7 @@ export default class UserForm extends React.Component {
         <input
           type="text"
           name="complement"
-          id=""
+          className=""
           value={ complement }
           placeholder="Complemento"
           onChange={ handleChange }
@@ -116,7 +116,7 @@ export default class UserForm extends React.Component {
         <input
           type="text"
           name="number"
-          id=""
+          className=""
           value={ number }
           placeholder="Número"
           onChange={ handleChange }
@@ -124,14 +124,14 @@ export default class UserForm extends React.Component {
         <input
           type="text"
           name="city"
-          id=""
+          className=""
           value={ city }
           placeholder="Cidade"
           onChange={ handleChange }
         />
         <select
           name="state"
-          id="select-state"
+          className="select-state"
           value={ state }
           onChange={ handleChange }
         >

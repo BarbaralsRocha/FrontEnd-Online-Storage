@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { BiSearchAlt } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import {
   addProductToCart,
@@ -10,6 +11,7 @@ import {
   getCartProducts } from '../services/api';
 import Categories from './Categories';
 import Products from './Products';
+import '../css/ListProducts.css';
 
 export default class ListProducts extends React.Component {
 state= {
@@ -54,29 +56,43 @@ render() {
   const { categorieList, list, search, id, isEmpty, size } = this.state;
   return (
     <div>
-      <input
-        type="text"
-        name="search"
-        value={ search }
-        onChange={ this.handleChangeSearch }
-        data-testid="query-input"
-      />
-      <button
-        type="button"
-        data-testid="query-button"
-        onClick={ () => this.handleClick(id) }
-      >
-        Search
-      </button>
-      <Link to="/cart" data-testid="shopping-cart-button">
-        <AiOutlineShoppingCart />
-      </Link>
-      <p data-testid="shopping-cart-size">{size}</p>
-      <p data-testid="home-initial-message">
+      <div className="search-top-content">
+        <div className="search-container">
+          <input
+            type="text"
+            name="search"
+            value={ search }
+            onChange={ this.handleChangeSearch }
+            data-testid="query-input"
+          />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ () => this.handleClick(id) }
+          >
+            Search
+          </button>
+        </div>
+        <nav className="shop-cart">
+          <Link to="/cart" data-testid="shopping-cart-button">
+            <AiOutlineShoppingCart />
+          </Link>
+          <p data-testid="shopping-cart-size">{size}</p>
+        </nav>
+      </div>
+      <p data-testid="home-initial-message" className="search-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
-      <Categories categorie={ categorieList } listCategories={ this.handleChange } />
-      <Products listProducts={ list } isEmpty={ isEmpty } addToCart={ this.addToCart } />
+      <div className="categories">
+        <Categories categorie={ categorieList } listCategories={ this.handleChange } />
+      </div>
+      <div className="products">
+        <Products
+          listProducts={ list }
+          isEmpty={ isEmpty }
+          addToCart={ this.addToCart }
+        />
+      </div>
     </div>
   );
 }

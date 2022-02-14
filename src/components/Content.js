@@ -8,7 +8,7 @@ import Checkout from '../pages/Checkout';
 export default class Content extends React.Component {
   render() {
     return (
-      <main>
+      <main className="main-content">
         <Switch>
           <Route exact path="/" component={ ListProducts } />
           <Route path="/cart" component={ ShopCart } />
