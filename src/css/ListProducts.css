@@ -10,8 +10,17 @@
   display: flex;
   flex-grow: 50;
   justify-content: center;
+  align-items: center;
+}
 
-  /* background-color: blueviolet; */
+.search-icon {
+  font-size: 34px;
+  margin-left: 12px;
+  color: gray;
+}
+
+.search-icon:hover {
+  cursor: pointer;
 }
 
 .search-container input {

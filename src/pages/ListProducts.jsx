@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-// import { BiSearchAlt } from 'react-icons/bi';
+import { BiSearchAlt } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import {
   addProductToCart,
@@ -67,13 +67,14 @@ render() {
             onChange={ this.handleChangeSearch }
             data-testid="query-input"
           />
-          <button
+          <BiSearchAlt
             type="button"
             data-testid="query-button"
             onClick={ () => this.handleClick(id) }
+            className="search-icon"
           >
             Search
-          </button>
+          </BiSearchAlt>
         </div>
         <nav className="shop-cart">
           <Link to="/cart" data-testid="shopping-cart-button">
