@@ -1,25 +1,26 @@
 .shop-cart {
-  display: flex;
-  justify-content: flex-end;
   align-items: center;
-  margin-right: 30px;
+  display: flex;
   flex-grow: 1;
+  justify-content: flex-end;
+  margin-right: 30px;
 }
 
 .search-container {
-  flex-grow: 50;
   display: flex;
+  flex-grow: 50;
   justify-content: center;
+
   /* background-color: blueviolet; */
 }
 
 .search-container input {
-  padding: 12px;
-  width: 50%;
-  border-radius: 15px;
   border: none;
+  border-radius: 15px;
   box-shadow: 5px 5px 5px rgba(156, 156, 156, 0.774);
   outline-style: none;
+  padding: 12px;
+  width: 50%;
 }
 
 .search-container input:focus {
@@ -27,23 +28,23 @@
 }
 
 .search-top-content {
-  flex-grow: 1;
-  display: flex;
   align-items: center;
+  display: flex;
+  flex-grow: 1;
   justify-content: center;
 }
 
 .shop-cart p {
-  display: flex;
-  justify-content: center;
   align-items: center;
   background-color: #c3a22d;
-  width: 12px;
-  height: 12px;
   border-radius: 50%;
   color: white;
+  display: flex;
+  height: 12px;
+  justify-content: center;
   padding: 10px;
   transform: translate(-13px, 10px);
+  width: 12px;
 }
 
 .shop-cart a {

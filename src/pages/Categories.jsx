@@ -13,7 +13,7 @@ export default class Categories extends React.Component {
                 <input
                   type="radio"
                   name="categoria"
-                  className={ categoria.id }
+                  id={ categoria.id }
                   value={ categoria.name }
                   onChange={ listCategories }
                 />

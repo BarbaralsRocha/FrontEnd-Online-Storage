@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { BiSearchAlt } from 'react-icons/bi';
+// import { BiSearchAlt } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import {
   addProductToCart,
@@ -40,8 +40,10 @@ handleChangeSearch=({ target: { name, value } }) => {
 
 handleChange= async ({ target }) => {
   const { id } = target;
+  console.log(id);
   const listProducts = await getProductsFromCategoryAndQuery(id, '');
   const list = listProducts.results;
+  console.log(list);
   this.setState({ list, id, isEmpty: list.length === 0 });
 }
 
