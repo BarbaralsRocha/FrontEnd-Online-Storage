@@ -25,7 +25,6 @@ state= {
 
 async componentDidMount() {
   const categorieAPI = await getCategories();
-  console.log(categorieAPI);
   this.setState({ categorieList: categorieAPI, size: getSize() });
 }
 
@@ -87,10 +86,11 @@ render() {
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
       <div className="categories-list-content">
-        <Categories
-          categorie={ categorieList }
-          listCategories={ this.handleChange }
-        />
+        { categorieList.length
+        && <Categories
+          categorieList={ categorieList }
+          handleChange={ this.handleChange }
+        /> }
         <Products
           listProducts={ list }
           isEmpty={ isEmpty }
