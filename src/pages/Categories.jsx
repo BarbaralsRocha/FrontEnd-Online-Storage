@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../css/Categories.css';
 
 export default class Categories extends React.Component {
   render() {
     const { categorie, listCategories } = this.props;
     return (
-      <div>
+      <div className="categories">
         {
           categorie.map((categoria) => (
             <div key={ categoria.id }>

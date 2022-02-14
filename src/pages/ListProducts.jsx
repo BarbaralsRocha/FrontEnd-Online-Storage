@@ -25,6 +25,7 @@ state= {
 
 async componentDidMount() {
   const categorieAPI = await getCategories();
+  console.log(categorieAPI);
   this.setState({ categorieList: categorieAPI, size: getSize() });
 }
 
@@ -43,7 +44,6 @@ handleChange= async ({ target }) => {
   console.log(id);
   const listProducts = await getProductsFromCategoryAndQuery(id, '');
   const list = listProducts.results;
-  console.log(list);
   this.setState({ list, id, isEmpty: list.length === 0 });
 }
 
@@ -86,10 +86,11 @@ render() {
       <p data-testid="home-initial-message" className="search-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
-      <div className="categories">
-        <Categories categorie={ categorieList } listCategories={ this.handleChange } />
-      </div>
-      <div className="products">
+      <div className="categories-list-content">
+        <Categories
+          categorie={ categorieList }
+          listCategories={ this.handleChange }
+        />
         <Products
           listProducts={ list }
           isEmpty={ isEmpty }

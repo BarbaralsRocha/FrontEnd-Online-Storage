@@ -1,0 +1,9 @@
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 16px;
+}
+
+.categories label {
+  padding: 16px;
+}
