@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { IoIosArrowBack } from 'react-icons/io';
 import {
   getProductsGroupedByQuantity,
   getCartProducts,
@@ -7,6 +8,7 @@ import {
   addProductToCart,
   addProductsSize,
 } from '../services/api';
+import '../css/ShopCart.css';
 
 export default class ShopCart extends React.Component {
   state = {
@@ -61,45 +63,65 @@ export default class ShopCart extends React.Component {
    render() {
      const { products, totalPrice } = this.state;
      return (
-       <div>
-         {
-           !products.length
-             ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-             : (
-               products.map((product) => (
-                 <div key={ product.id }>
-                   <button
-                     type="button"
-                     onClick={ () => this.decreaseQuantity(product) }
-                   >
-                     X
-                   </button>
-                   <p data-testid="shopping-cart-product-name">{product.title}</p>
-                   <img src={ product.thumbnail } alt={ product.title } />
-                   <p>
-                     $
-                     {product.price}
-                   </p>
-                   <p data-testid="shopping-cart-product-quantity">{product.quantity}</p>
-                   <button
-                     type="button"
-                     data-testid="product-increase-quantity"
-                     disabled={ this.stockProducts(product) }
-                     onClick={ () => this.increaseQuantity(product) }
-                   >
-                     +
-                   </button>
-                   <button
-                     type="button"
-                     data-testid="product-decrease-quantity"
-                     onClick={ () => this.decreaseQuantity(product, 1) }
-                   >
-                     -
-                   </button>
-                 </div>
-               ))
-             )
-         }
+       <div className="shop-cart-content">
+         <div>
+           <Link to="/">
+             <IoIosArrowBack className="back-button" />
+           </Link>
+         </div>
+         <div className="list-cart-products">
+           <div className="cart-product-titles">
+             <div className="column-title">
+               <span>Produtos</span>
+             </div>
+             <div className="column-title">
+               <span>Quantidade</span>
+               <span>Valor</span>
+             </div>
+           </div>
+           {
+             !products.length
+               ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+               : (
+                 products.map((product) => (
+                   <div key={ product.id }>
+                     <button
+                       type="button"
+                       onClick={ () => this.decreaseQuantity(product) }
+                     >
+                       X
+                     </button>
+                     <p data-testid="shopping-cart-product-name">{product.title}</p>
+                     <img src={ product.thumbnail } alt={ product.title } />
+                     <p>
+                       $
+                       {product.price}
+                     </p>
+                     <p
+                       data-testid="shopping-cart-product-quantity"
+                     >
+                       {product.quantity}
+                     </p>
+                     <button
+                       type="button"
+                       data-testid="product-increase-quantity"
+                       disabled={ this.stockProducts(product) }
+                       onClick={ () => this.increaseQuantity(product) }
+                     >
+                       +
+                     </button>
+                     <button
+                       type="button"
+                       data-testid="product-decrease-quantity"
+                       onClick={ () => this.decreaseQuantity(product, 1) }
+                     >
+                       -
+                     </button>
+                   </div>
+                 ))
+               )
+           }
+         </div>
          <div>
            <p>
              Preço Total R$
