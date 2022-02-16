@@ -1,7 +1,6 @@
 .shop-cart {
   align-items: center;
   display: flex;
-  flex-grow: 1;
   justify-content: flex-end;
   margin-right: 30px;
 }
@@ -9,7 +8,7 @@
 .search-container {
   align-items: center;
   display: flex;
-  flex-grow: 50;
+  flex-grow: 1;
   justify-content: center;
 }
 
@@ -39,7 +38,7 @@
 .search-top-content {
   align-items: center;
   display: flex;
-  flex-grow: 1;
+  flex-grow: 0;
   justify-content: center;
 }
 

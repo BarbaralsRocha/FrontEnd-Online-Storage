@@ -1,0 +1,24 @@
+.shop-cart-content {
+  padding: 0 100px;
+}
+
+.back-button {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.cart-product-titles {
+  background-color: aquamarine;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.column-title span {
+  box-shadow: 2px 2px 4px #9c9c9cc5;
+  padding: 8px;
+}
+
+.column-title:last-child span {
+  margin-left: 32px;
+}
