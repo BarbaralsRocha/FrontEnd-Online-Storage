@@ -15,7 +15,7 @@ import '../css/ListProducts.css';
 
 export default class ListProducts extends React.Component {
 state= {
-  categorieList: [],
+  categoriesList: [],
   list: [],
   search: '',
   id: '',
@@ -24,8 +24,8 @@ state= {
 }
 
 async componentDidMount() {
-  const categorieAPI = await getCategories();
-  this.setState({ categorieList: categorieAPI, size: getSize() });
+  const categoriesAPI = await getCategories();
+  this.setState({ categoriesList: categoriesAPI, size: getSize() });
 }
 
 addToCart = (product) => {
@@ -54,7 +54,7 @@ handleClick = async (id) => {
 }
 
 render() {
-  const { categorieList, list, search, id, isEmpty, size } = this.state;
+  const { categoriesList, list, search, id, isEmpty, size } = this.state;
   return (
     <div>
       <div className="search-top-content">
@@ -86,9 +86,9 @@ render() {
         Digite algum termo de pesquisa ou escolha uma categoria.
       </p>
       <div className="categories-list-content">
-        { categorieList.length
+        { categoriesList.length
         && <Categories
-          categorieList={ categorieList }
+          categoriesList={ categoriesList }
           handleChange={ this.handleChange }
         /> }
         <Products
