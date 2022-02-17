@@ -19,6 +19,6 @@
   padding: 8px;
 }
 
-.column-title:last-child span {
+.column-title:last-child span:last-child {
   margin-left: 32px;
 }

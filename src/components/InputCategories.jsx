@@ -14,6 +14,7 @@ export default class InputCategories extends React.Component {
             id={ categoria.id }
             value={ categoria.name }
             onChange={ listCategories }
+            className="input-categories"
           />
           { categoria.name }
         </label>

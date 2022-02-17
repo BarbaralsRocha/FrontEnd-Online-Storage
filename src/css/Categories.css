@@ -1,10 +1,74 @@
-.categories {
+.carousel {
+  align-items: center;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: left;
+  margin: 0 64px;
+  overflow: hidden;
+  width: auto;
+}
+
+.categories-content {
+  align-items: center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: left;
+  margin-right: 16px;
+  overflow: hidden;
   padding: 16px;
 }
 
-.categories label {
-  padding: 16px;
+.categories {
+  display: flex;
+  left: 0;
+  position: relative;
+  transition: 0.5s;
 }
+
+.categories label {
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  font-size: 95%;
+  height: 10vw;
+  justify-content: center;
+  margin-right: 16px;
+  max-height: 100px;
+  max-width: 100px;
+  padding: 12px;
+  text-align: center;
+  transition: 0.1s;
+  width: 10vw;
+}
+
+.categories label:hover {
+  box-shadow: 2px 2px 4px #9c9c9cc5;
+  opacity: 0.8;
+}
+
+.categories label:active {
+  box-shadow: 2px 2px 4px #9c9c9cc5;
+  opacity: 1;
+}
+
+.input-categories {
+  cursor: pointer;
+  display: none;
+}
+
+.arrow-button {
+  background-color: white;
+  cursor: pointer;
+  font-size: 32px;
+  width: 32px;
+}
+
+.arrow-button:hover {
+  opacity: 0.7;
+}
+
+.arrow-button:active {
+  opacity: 1;
+}
+
